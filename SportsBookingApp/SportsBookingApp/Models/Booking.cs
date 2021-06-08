@@ -14,7 +14,8 @@ namespace SportsBookingApp.Models
         public DateTime EndingBookingTime { get; set; }
         public DateTime BookingDate { get; set; }
         public double TotalPaymentAmount { get; set; }
-        
+        public string BookingStripeID { get; set; }
+
     }
 
 }

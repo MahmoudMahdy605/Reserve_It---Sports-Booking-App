@@ -40,7 +40,8 @@ namespace SportsBookingApp.Services
                 EndingBookingTime = f.Object.EndingBookingTime,
                 TotalPaymentAmount = f.Object.TotalPaymentAmount,
                 CenterName = f.Object.CenterName,
-                BookingDate = f.Object.BookingDate
+                BookingDate = f.Object.BookingDate,
+                BookingStripeID = f.Object.BookingStripeID
             }).ToList();
 
         return bookings;

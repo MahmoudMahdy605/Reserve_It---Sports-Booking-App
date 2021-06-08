@@ -7,7 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsBookingApp.Android", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsBookingApp.iOS", "SportsBookingApp\SportsBookingApp.iOS\SportsBookingApp.iOS.csproj", "{CB2664BF-2812-4FA3-AC81-EDAB1D4595AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsBookingApp", "SportsBookingApp\SportsBookingApp\SportsBookingApp.csproj", "{FD68C874-BC55-4443-A4E6-7465C5C513D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportsBookingApp", "SportsBookingApp\SportsBookingApp\SportsBookingApp.csproj", "{FD68C874-BC55-4443-A4E6-7465C5C513D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{359ECA21-1B13-4680-9C35-DAAA9DEFEC88}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

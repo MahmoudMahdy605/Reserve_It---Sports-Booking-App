@@ -14,12 +14,59 @@ namespace SportsBookingApp.Helpers
         FirebaseClient client;
         public List<Court> Courts { get; set; }
 
+        //string centerName, string sportName, string courtPaymentTimeScale, double courtPaymentCostScale, string courtImage, int sportID = 9, int courtID = 9, string courtName, int maxReservationATime = 1
+
+        public AddCourtData(string centerName, string sportName, string courtName , string courtPaymentTimeScale, double courtPaymentCostScale, string courtImage)
+        {
+            client = new FirebaseClient("https://demooo-fa47d-default-rtdb.firebaseio.com/");
+            Courts = new List<Court>()
+            {
+                new Court
+                {
+                    SportName = sportName,
+                    CourtName = courtName,
+                    //SportID = sportID,
+                    CenterName = centerName,
+                    //CourtID = courtID,
+                    CourtPaymentTimeScale = courtPaymentTimeScale,
+                    CourtPaymentCostScale = courtPaymentCostScale,
+                    CourtImage = courtImage,
+                    //MaxReservationATime = maxReservationATime
+
+                }
+            };
+        }
+
         public AddCourtData()
         {
             client = new FirebaseClient("https://demooo-fa47d-default-rtdb.firebaseio.com/");
             Courts = new List<Court>()
             {
                 new Court
+                {
+                    CourtID = 1,
+                    SportID = 1,
+                    SportName = "Ping Pong",
+                    CourtName = "Table 1",
+                    CourtPaymentTimeScale = "Hour",
+                    MaxReservationATime =1,
+                    CourtPaymentCostScale = 35,
+                    CenterName = "Stars Center",
+
+                    CourtImage = "ping_pong_table1.jpg"
+                },new Court
+                {
+                    CourtID = 2,
+                    SportID = 1,
+                    SportName = "Ping Pong",
+                    CourtName = "Table 2",
+                    CourtPaymentTimeScale = "Hour",
+                    MaxReservationATime =1,
+                    CourtPaymentCostScale = 35,
+                    CenterName = "Stars Center",
+
+                    CourtImage = "ping_pong_table2.jpg"
+                },new Court
                 {
                     CourtID = 1,
                     SportID = 1,
@@ -48,18 +95,6 @@ namespace SportsBookingApp.Helpers
                     CenterName = "Champions Center",
 
                     CourtImage = "ping_pong_table2.jpg "
-                },new Court
-                {
-                    CourtID = 1,
-                    SportID = 1,
-                    SportName = "Ping Pong",
-                    CourtName = "Table 1",
-                    CourtPaymentTimeScale = "Hour",
-                    MaxReservationATime =1,
-                    CourtPaymentCostScale = 35,
-                    CenterName = "Stars Center",
-
-                    CourtImage = "ping_pong_table1.jpg"
                 },new Court
                 {
                     CourtID = 1,
@@ -209,6 +244,7 @@ namespace SportsBookingApp.Helpers
                     });
                 }
 
+                await Application.Current.MainPage.DisplayAlert("Done", " The new court was added successfully ", "OK");
             }
             catch (Exception ex)
             {

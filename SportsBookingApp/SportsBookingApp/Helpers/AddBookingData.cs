@@ -16,7 +16,7 @@ namespace SportsBookingApp.Helpers
 
 
         
-        public AddBookingData(string sportName, string courtName, string userName, string centerName, DateTime startingBookingTime, DateTime endingBookingTime, DateTime bookingDate, double totalPaymentAmount)
+        public AddBookingData(string sportName, string courtName, string userName, string centerName, DateTime startingBookingTime, DateTime endingBookingTime, DateTime bookingDate, double totalPaymentAmount, string bookingStripeID)
         {
             client = new FirebaseClient("https://demooo-fa47d-default-rtdb.firebaseio.com/");
             Bookings = new List<Booking>()
@@ -30,7 +30,8 @@ namespace SportsBookingApp.Helpers
                     StartingBookingTime = startingBookingTime,
                     EndingBookingTime = endingBookingTime,
                     BookingDate = bookingDate,
-                    TotalPaymentAmount = totalPaymentAmount
+                    TotalPaymentAmount = totalPaymentAmount,
+                    BookingStripeID = bookingStripeID
 
                 }
             };
@@ -42,6 +43,36 @@ namespace SportsBookingApp.Helpers
             client = new FirebaseClient("https://demooo-fa47d-default-rtdb.firebaseio.com/");
             Bookings = new List<Booking>()
             {
+                new Booking
+                {
+                    SportName = "Ping Pong",
+                    CourtName = "Table 2",
+                    Username = "Moustafa",
+                    CenterName = "Stars Center",
+                    StartingBookingTime = DateTime.Now.AddHours(16),
+                    EndingBookingTime =  DateTime.Now.AddHours(17),
+                    BookingDate = System.DateTime.Now.AddDays(1).Date,
+                    TotalPaymentAmount = 35
+
+                    
+                    //BookingStripeID
+
+                },new Booking
+                {
+                    SportName = "Ping Pong",
+                    CourtName = "Table 2",
+                    Username = "Fadel",
+                    CenterName = "Stars Center",
+                    StartingBookingTime = DateTime.Now.AddHours(19.5),
+                    EndingBookingTime =  DateTime.Now.AddHours(21),
+                    BookingDate = System.DateTime.Now.AddDays(1).Date,
+                    TotalPaymentAmount = 52.5,
+
+                    //BookingStripeID
+
+                }
+
+                /*
                 new Booking
                 {
                     SportName = "Futsal",
@@ -100,6 +131,7 @@ namespace SportsBookingApp.Helpers
                     TotalPaymentAmount = 110
 
                 }
+                */
             };
         }
 
@@ -119,7 +151,8 @@ namespace SportsBookingApp.Helpers
                         StartingBookingTime = booking.StartingBookingTime,
                         EndingBookingTime = booking.EndingBookingTime,
                         BookingDate = booking.BookingDate,
-                        TotalPaymentAmount = booking.TotalPaymentAmount
+                        TotalPaymentAmount = booking.TotalPaymentAmount,
+                        BookingStripeID = booking.BookingStripeID
                     });
                 }
 

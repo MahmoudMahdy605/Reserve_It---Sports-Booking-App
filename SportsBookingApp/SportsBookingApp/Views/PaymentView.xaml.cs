@@ -21,7 +21,9 @@ namespace SportsBookingApp.Views
         string mycustomer;
         string getchargedID;
         string refundID;
-        
+
+        string CHARGEDID;
+
         public PaymentView(DateTime bookingDate, string centerName, string sportName, string courtName, string startingBookingTime, string endingBookingTime, double TotalPaymentAmount)
         {
             InitializeComponent();
@@ -48,7 +50,7 @@ namespace SportsBookingApp.Views
             double RoundedTotalPaymentAmount = Math.Round(TotalPaymentAmount, 1 , MidpointRounding.ToEven);
             totalpaymentamount.Text = "RM " + RoundedTotalPaymentAmount.ToString();
 
-            string totalp = totalpaymentamount.Text;
+            string totalp = RoundedTotalPaymentAmount.ToString();
 
             DateTime s = Convert.ToDateTime(startingBookingTime);
             DateTime d = Convert.ToDateTime(endingBookingTime);
@@ -56,6 +58,7 @@ namespace SportsBookingApp.Views
 
             NewEventHandler.Clicked += async (sender, args) =>
             {
+                
                 // if check payment from Moustafa is true, then add booking to firebase
                 try
                 {
@@ -99,9 +102,9 @@ namespace SportsBookingApp.Views
 
                     Stripe.CustomerCreateOptions myCustomer = new Stripe.CustomerCreateOptions()
                     {
-                        Name = "Moustafa",
+                        Name = username.Text,
                         Email = "hoda7.kimmo@gmail.com",
-                        Description = "Customer for center@example.com",
+                        Description = "Reservation of " + courtname.Text + "from" + startingBookingTime.ToString() + " to " + endingBookingTime.ToString(),
                     };
 
                     var customerService = new Stripe.CustomerService();
@@ -129,8 +132,9 @@ namespace SportsBookingApp.Views
                     var service1 = new Stripe.ChargeService();
                     Stripe.Charge charge = service1.Create(chargeoptions); // This will do the Payment
 
-
-                    getchargedID = charge.Id; // Not needed
+                    
+                    getchargedID = charge.Id;
+                    CHARGEDID = charge.Id;
                 }
                 catch (Exception ex)
                 {
@@ -145,7 +149,7 @@ namespace SportsBookingApp.Views
                     //if (getchargedID != null)
                     if (getchargedID != null)
                     {
-                        var acd = new AddBookingData(sportName, courtName, username.Text, centerName, s, d, bookingDate, RoundedTotalPaymentAmount);
+                        var acd = new AddBookingData(sportName, courtName, username.Text, centerName, s, d, bookingDate, RoundedTotalPaymentAmount, CHARGEDID);
                         await acd.AddBookingDataAsync();
 
 
@@ -161,9 +165,9 @@ namespace SportsBookingApp.Views
                         
                     }
                 }
-            
+                
 
-
+                
 
                 /*
                  * var acd = new AddBookingData(sportName, courtName, username.Text, centerName, s, d, bookingDate, RoundedTotalPaymentAmount);

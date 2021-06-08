@@ -10,13 +10,20 @@ namespace SportsBookingApp.ViewModels
     public class AdminBookingHistoryViewModel : BaseViewModel
     {
         double totalPerDay_ForBookingsTotalMoney;
+
+        int i = 0;
         public AdminBookingHistoryViewModel(string selectedsportname, string Centername)
         {
             CenterName = Centername;
             SelectedSportName = selectedsportname;
 
             Courts = new ObservableCollection<Court>();
-            Bookings = new ObservableCollection<Booking>();
+            courtscopy = new ObservableCollection<Court>();
+            Bookings0 = new List<Booking>();
+            Bookings1 = new List<Booking>();
+            Bookings2 = new List<Booking>();
+            Bookings3 = new List<Booking>();
+            Bookings4 = new List<Booking>();
 
             //b = new ObservableCollection<Booking>();
             //TotalRevenueForTheCourtPerDay = new ObservableCollection<double>();
@@ -38,7 +45,12 @@ namespace SportsBookingApp.ViewModels
             SelectedSportName = selectedsportname;
 
             Courts = new ObservableCollection<Court>();
-            Bookings = new ObservableCollection<Booking>();
+            courtscopy = new ObservableCollection<Court>();
+            Bookings0 = new List<Booking>();
+            Bookings1 = new List<Booking>();
+            Bookings2 = new List<Booking>();
+            Bookings3 = new List<Booking>();
+            Bookings4 = new List<Booking>();
 
             //b = new ObservableCollection<Booking>();
             //TotalRevenueForTheCourtPerDay = new ObservableCollection<double>();
@@ -56,6 +68,7 @@ namespace SportsBookingApp.ViewModels
         }
 
         public ObservableCollection<Court> Courts { get; set; }
+        public ObservableCollection<Court> courtscopy { get; set; }
 
         /*
         private ObservableCollection<Court> _Courts { get; set; }
@@ -84,8 +97,15 @@ namespace SportsBookingApp.ViewModels
             }
         }
         */
-        
-        public ObservableCollection<Booking> Bookings { get; set; }
+
+        //public ObservableCollection<Booking> Bookings { get; set; }
+
+        public List<Booking> Bookings0 { get; set; }
+        public List<Booking> Bookings1 { get; set; }
+        public List<Booking> Bookings2 { get; set; }
+        public List<Booking> Bookings3 { get; set; }
+        public List<Booking> Bookings4 { get; set; }
+
 
         /*
         private ObservableCollection<Booking> _Bookings { get; set; }
@@ -131,50 +151,50 @@ namespace SportsBookingApp.ViewModels
 
             Courts.Clear();
             //b.Clear();
-            //Bookings.Clear();
-
 
 
             foreach (var Courtitem in Courtsdata)
             {
-                /*
-                return new ObservableCollection<CourtCopy>
-            {
-
-                new CourtCopy { CenterName = Courtitem.CenterName, SportName = Courtitem.SportName, SportID = Courtitem.SportID, CourtName = Courtitem.CourtName, MaxReservationATime = Courtitem.MaxReservationATime, CourtPaymentTimeScale = Courtitem.CourtPaymentTimeScale, CourtPaymentCostScale = Courtitem.CourtPaymentCostScale,
-                    BookingsCopyyy = new ObservableCollection<BookingsCopy>{ new BookingsCopy { Name = "Mahdy", Time = "04:00 PM", Amount = "RM 100" }, new BookingsCopy { Name = "Tahan", Time = "06:00 PM", Amount = "RM 150" }, new BookingsCopy { Name = "Gerald", Time = "07:00 PM", Amount = "RM 50" } } },
-
-            };
-                */
 
 
                 totalPerDay_ForBookingsTotalMoney = 0;
 
 
 
-                Bookings.Clear();
+                
                 var Bookingsdata = await new BookingDataService().GetBookedSlotsItemsByCenterAndCourtAndDateAsync(selectedCenterName, Courtitem.CourtName, bookingsDate);
-                foreach (var Bookingitem in Bookingsdata)
+                foreach (Booking Bookingitem in Bookingsdata)
                 {
-                    Bookings.Add(Bookingitem);
-
+                    if (i == 0) Bookings0.Add(Bookingitem);
+                    else if (i == 1) Bookings1.Add(Bookingitem);
+                    else if (i == 2) Bookings2.Add(Bookingitem);
+                    else if (i == 3) Bookings3.Add(Bookingitem);
+                    else if (i == 4) Bookings4.Add(Bookingitem);
                     //b.Add(Bookingitem);
 
                     totalPerDay_ForBookingsTotalMoney += Bookingitem.TotalPaymentAmount;
-
+                   
                 }
-
                 //TotalRevenueForTheCourtPerDay.Add(totalPerDay_ForBookingsTotalMoney);
 
 
                 Courtitem.TotalRevenueForTheCourtPerDay = totalPerDay_ForBookingsTotalMoney;
                 //Courtitem.BookingMember.Clear();
-                Courtitem.BookingMember = Bookings;
+                //bookingcount += Bookings.Count;
+                if (i == 0) Courtitem.BookingMember = Bookings0;
+                else if (i == 1) Courtitem.BookingMember = Bookings1;
+                else if (i == 2) Courtitem.BookingMember = Bookings2;
+                else if (i == 3) Courtitem.BookingMember = Bookings3;
+                else if (i == 4) Courtitem.BookingMember = Bookings4;
+
+                //Courtitem.BookingMember = Bookings;
+
                 Courts.Add(Courtitem);
+                i++;
 
-
+                //Bookings.RemoveRange( 0, Bookings.Count);
             }
-
+            courtscopy = Courts;
         }
 
         //public ObservableCollection<double> TotalRevenueForTheCourtPerDay { get; set; }

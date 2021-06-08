@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SportsBookingApp.Views.AdminCourtsManagementView">
+    <ContentPage.Content>
+
+        <StackLayout>
+            <ScrollView>
+                <Grid BackgroundColor="Wheat" RowSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="120"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" BackgroundColor="#455399" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <StackLayout Margin="0,-15,0,0" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label TextColor="White" x:Name="centerName" FontSize="30" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+                            <Label TextColor="White" FontSize="30" FontAttributes="Bold" HorizontalTextAlignment="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Courts Management"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                    </Grid>
+
+                    <StackLayout Grid.Row="1" Margin="5,0" >
+
+                        <Label Text="Sport Name : " FontAttributes="Bold" TextColor="Black" FontSize="20" Margin="15,10,0,0"/>
+                        <Entry  x:Name="sportName" Placeholder="Ping Pong / Futsal / Basketball" Margin="10,-5,0,0" />
+
+                        <Label Text="Court Name : " FontAttributes="Bold" TextColor="Black" FontSize="20" Margin="15,10,0,0"/>
+                        <Entry x:Name="courtName" Placeholder="Court 4 / Court 5" Margin="10,-5,0,0"/>
+
+                        <Label Text="Payment Time Scale : " FontAttributes="Bold" TextColor="Black" FontSize="20" Margin="15,10,0,0"/>
+                        <Entry x:Name="courtPaymentTimeScale" Placeholder="Hour / Day" Margin="10,-5,0,0"/>
+
+                        <Label Text="Payment Cost Scale (RM) : " FontAttributes="Bold" TextColor="Black" FontSize="20" Margin="15,10,0,0"/>
+                        <Entry x:Name="courtPaymentCostScale" Placeholder="100 / 50" Keyboard="Numeric" Margin="10,-5,0,0"/>
+
+
+                        <Button Text="Add Court Image" x:Name="AddCourtImage" BackgroundColor="MediumSeaGreen" CornerRadius="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+                        <Image x:Name="resultImage" />
+                    </StackLayout>
+
+                </Grid>
+            </ScrollView>
+
+
+            <Button Grid.Row="2" Text="Add Court" x:Name="AddCourt" BackgroundColor="LightBlue" CornerRadius="20" TextColor="Black" VerticalOptions="Center"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

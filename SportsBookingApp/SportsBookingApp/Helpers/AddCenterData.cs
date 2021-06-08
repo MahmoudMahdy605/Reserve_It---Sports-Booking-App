@@ -37,29 +37,29 @@ namespace SportsBookingApp.Helpers
                 },new Center
                 {
                     CenterID = 2,
-                    CenterName = "Champions Center",
-                    CenterPhone = "03-333444",
-                    CenterEmail = "ChampionsCenter@hotmail.com",
-                    CenterPassword = "0000",
-                    CenterImage = "champions_center_img",
-                    CenterRating = 4.8,
-                    NoOfTotalSportsforCenter = 3,
-                    NoOfTotalCourtsforCenter = 6,
-                    CenterSports = "Futsal, Ping Pong, Basketball",
-                    CenterLatitude = "3.194841680100653",
-                    CenterLongitude = "101.71713055588967"
-                },new Center
-                {
-                    CenterID = 3,
                     CenterName = "Stars Center",
                     CenterPhone = "03-223344",
                     CenterEmail = "StarsCenter@hotmail.com",
                     CenterPassword = "0000",
                     CenterImage = "star_center_img",
-                    CenterRating = 4.7,
+                    CenterRating = 4.8,
                     NoOfTotalSportsforCenter = 3,
                     NoOfTotalCourtsforCenter = 4,
                     CenterSports = "Ping Pong, Badminton, Gym",
+                    CenterLatitude = "3.194841680100653",
+                    CenterLongitude = "101.71713055588967"
+                },new Center
+                {
+                    CenterID = 3,
+                    CenterName = "Champions Center",
+                    CenterPhone = "03-333444",
+                    CenterEmail = "ChampionsCenter@hotmail.com",
+                    CenterPassword = "0000",
+                    CenterImage = "champions_center_img",
+                    CenterRating = 4.7,
+                    NoOfTotalSportsforCenter = 3,
+                    NoOfTotalCourtsforCenter = 6,
+                    CenterSports = "Futsal, Ping Pong, Basketball",
                     CenterLatitude = "3.194841680100653",
                     CenterLongitude = "101.71713055588967"
                 }

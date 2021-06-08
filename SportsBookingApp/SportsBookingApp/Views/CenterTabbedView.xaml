@@ -10,5 +10,6 @@
   <!--Pages can be added as references or inline-->
 
     <views:AdminMainView Title="Home" IconImageSource="home_75.png"></views:AdminMainView>
-    <views:CenterDataView Title="Center Data" IconImageSource="booking_80"></views:CenterDataView>
+    <views:CenterDataView Title="Center Data" IconImageSource="data_analysis_img.png"></views:CenterDataView>
+    <views:AdminCourtsManagementView Title="Courts" IconImageSource="courts_management_img.png"></views:AdminCourtsManagementView>
 </TabbedPage>

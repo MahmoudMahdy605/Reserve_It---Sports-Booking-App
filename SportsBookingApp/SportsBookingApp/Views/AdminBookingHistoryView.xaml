@@ -34,105 +34,19 @@
                     </Label>
                 </StackLayout>
             </Grid>
-            <!--<pv:PancakeView Grid.Row="1" HeightRequest="80" Margin="0,-40,0,0" VerticalOptions="Center"
-                        HorizontalOptions="Center">
-                <StackLayout WidthRequest="90" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="#00C6AE">
-                    <StackLayout Padding="10">
-                        <Label Text="23" TextColor="White" FontSize="36" HorizontalOptions="Center" />
-                        <Label Text="MARCH" TextColor="White" FontSize="12" HorizontalOptions="Center" Margin="0,-10,0,0"/>
-                    </StackLayout>
-                </StackLayout>
-            </pv:PancakeView>-->
+            
 
             <StackLayout Grid.Row="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                 <DatePicker x:Name="SelectedBookingDate" DateSelected="SelectedBookingDate_DateSelected" Format="D" MaximumDate="2030/3/12" MinimumDate="2021/5/6" FontAttributes="Bold" FontSize="22"/>
             </StackLayout>
 
 
-            <!--<CollectionView BackgroundColor="Blue" Grid.Row="2" Margin="22" HorizontalOptions="End" VerticalOptions="FillAndExpand"
-                        SelectionMode="None" ItemsSource="{Binding Courts}">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="20"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <pv:PancakeView BackgroundColor="White" VerticalOptions="StartAndExpand" 
-                                    HorizontalOptions="FillAndExpand">
-                            <Grid VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <BoxView BackgroundColor="Crimson"  WidthRequest="3" HorizontalOptions="Start"
-                                     VerticalOptions="FillAndExpand"/>
-                                <xct:Expander Grid.Column="1">
-                                    <xct:Expander.Header>
-                                        <Grid Padding="20">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            
-                                            <StackLayout Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center">
-                                                <Label Text="{Binding CourtName}" HorizontalOptions="StartAndExpand" TextColor="Black" FontAttributes="Bold" FontSize="16"/>
-                                                <Label Text="8 AM - 2 AM" HorizontalOptions="Start" TextColor="#2F3246" FontSize="14"/>
-                                            </StackLayout>
-
- Label Grid.Column="1" Text="{Binding Source={x:Reference root},Path=BindingContext.TotalRevenueForTheCourtPerDay, StringFormat='RM {0} '}"  VerticalOptions="Center" HorizontalOptions="Center" TextColor="#2F3246" FontSize="18" />
-            <Label Grid.Column="1" Text="{Binding Source={x:Reference root},Path=BindingContext.TotalRevenueForTheCourtPerDay, StringFormat='RM {0} '}"  VerticalOptions="Center" HorizontalOptions="Center" TextColor="#2F3246" FontSize="18" />
-
- <StackLayout Grid.Column="1" BindableLayout.ItemsSource="{Binding Source={x:Reference root},Path=BindingContext.TotalRevenueForTheCourtPerDay}" HorizontalOptions="Center" VerticalOptions="Center">
-                                                <BindableLayout.ItemTemplate>
-                                                    <DataTemplate>
-
-                                                        <Label Text="{Binding TotalRevenueForTheCourtPerDay, StringFormat='RM {0} '}" TextColor="#2F3246" FontSize="18"/>
-                                                        
-                                                    </DataTemplate>
-                                                </BindableLayout.ItemTemplate>
-                                            </StackLayout>
-
-        </Grid>
-        </xct:Expander.Header>
-
-        <StackLayout Grid.Column="2" Spacing="10">
-            <Label Text="BOOKINGS" TextColor="Black" Opacity="10" FontAttributes="Bold" FontSize="14" Margin="20,0"/>
-
-BindableLayout.ItemsSource="{Binding Bookings}"
-            <StackLayout BindableLayout.ItemsSource="{Binding Source={x:Reference root},Path=BindingContext.Bookings}" HorizontalOptions="Start" VerticalOptions="Center" Margin="20,0,0,20">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="100"/>
-                            </Grid.ColumnDefinitions>
-
-                            <StackLayout Grid.Column="0" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
-                                <Label Text="{Binding StartingBookingTime, StringFormat='{}{0:h:mm tt}'}" FontAttributes="Bold" TextColor="Black"/>
-                                <Label Text="-" FontAttributes="Bold" TextColor="Black"/>
-                                <Label Text="{Binding EndingBookingTime, StringFormat='{}{0:h:mm tt}'}" FontAttributes="Bold" TextColor="Black"/>
-                                <Label Text=" : " FontAttributes="Bold" TextColor="Black"/>
-                                <Label Text="{Binding Username}"  TextColor="Black"/>
-                            </StackLayout>
-
-                            <Label Grid.Column="1" Text="{Binding TotalPaymentAmount, StringFormat='RM {0} '}" HorizontalOptions="Center" FontSize="13" FontAttributes="Bold" TextColor="Blue"/>
-                        </Grid>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </StackLayout>
-        </StackLayout>
-
-        </xct:Expander>
-        </Grid>
-        </pv:PancakeView>
-        </DataTemplate>
-        </CollectionView.ItemTemplate>
-        </CollectionView> -->
+            
 
 
             <!--EmptyView="Items Source is null or unvalid name/REPRESENTATION"-->
-            <CollectionView  Grid.Row="2" Margin="22" HorizontalOptions="End" VerticalOptions="FillAndExpand"
-                        SelectionMode="None" ItemsSource="{Binding Courts}">
+            <CollectionView Grid.Row="2" Margin="22" HorizontalOptions="End" VerticalOptions="FillAndExpand"
+                        SelectionMode="None" ItemsSource="{Binding Courts}" >
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="20"/>
                 </CollectionView.ItemsLayout>
@@ -161,7 +75,7 @@ BindableLayout.ItemsSource="{Binding Bookings}"
                                             </StackLayout>
 
                                             <!--<Label Grid.Column="1" Text="{Binding Source={x:Reference root},Path=BindingContext.TotalRevenueForTheCourtPerDay, StringFormat='RM {0} '}"... Text="{Binding Source={x:Reference root},Path=BindingContext.TotalRevenueForTheCourtPerDay, StringFormat='RM {0} '}"  VerticalOptions="Center" HorizontalOptions="Center" TextColor="#2F3246" FontSize="18" />-->
-                                            <Label Grid.Column="1" Text="{Binding TotalRevenueForTheCourtPerDay, StringFormat='RM {0} '}"  VerticalOptions="Center" HorizontalOptions="Center" TextColor="#2F3246" FontSize="18" />
+                                            <Label Grid.Column="1" Text="{Binding TotalRevenueForTheCourtPerDay, StringFormat='RM {0} '}"  VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" TextColor="Red" FontSize="19" />
 
                                             <!--<StackLayout Grid.Column="1" BindableLayout.ItemsSource="{Binding Source={x:Reference root},Path=BindingContext.TotalRevenueForTheCourtPerDay}" HorizontalOptions="Center" VerticalOptions="Center">
                                                 <BindableLayout.ItemTemplate>
@@ -182,7 +96,64 @@ BindableLayout.ItemsSource="{Binding Bookings}"
                                         <!--BookingMember is a list not an observablecollection-->
                                         <!--BindableLayout.ItemsSource="{Binding BindingContext.Taches1 , Source={x:Reference MyPage}}" ... BindableLayout.ItemsSource="{Binding Bookings}" .... BindableLayout.ItemsSource="{Binding Source={x:Reference root},Path=BindingContext.Bookings}" ... BindableLayout.ItemsSource="{Binding BookingMember}"-->
                                         <!--BindableLayout.EmptyView="Items Source is null or unvalid name/REPRESENTATION"-->
-                                        <StackLayout BindableLayout.EmptyView="No Bookings" BindableLayout.ItemsSource="{Binding Source={x:Reference root},Path=BindingContext.BookingMember}" HorizontalOptions="Start" VerticalOptions="Center" Margin="20,0,0,20">
+
+
+                                        <!--<StackLayout HorizontalOptions="Start" VerticalOptions="Center" Margin="20,0,0,20">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="100"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <StackLayout Grid.Column="0" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                                                    <Label Text="9:33 AM" FontAttributes="Bold" TextColor="Black"/>
+                                                    <Label Text="-" FontAttributes="Bold" TextColor="Black"/>
+                                                    <Label Text="10:33 AM" FontAttributes="Bold" TextColor="Black"/>
+                                                    <Label Text=" : " FontAttributes="Bold" TextColor="Black"/>
+                                                    <Label Text="Moustafa"  TextColor="Black"/>
+                                                </StackLayout>
+
+                                                <Label Grid.Column="1" Text="RM 35" HorizontalOptions="Center" FontSize="13" FontAttributes="Bold" TextColor="Blue"/>
+                                            </Grid>
+
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="100"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <StackLayout Grid.Column="0" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                                                    <Label Text="11:00 AM" FontAttributes="Bold" TextColor="Black"/>
+                                                    <Label Text="-" FontAttributes="Bold" TextColor="Black"/>
+                                                    <Label Text="11:02 AM" FontAttributes="Bold" TextColor="Black"/>
+                                                    <Label Text=" : " FontAttributes="Bold" TextColor="Black"/>
+                                                    <Label Text="Moustafa"  TextColor="Black"/>
+                                                </StackLayout>
+
+                                                <Label Grid.Column="1" Text="RM 2.3" HorizontalOptions="Center" FontSize="13" FontAttributes="Bold" TextColor="Blue"/>
+                                            </Grid>
+
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="100"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <StackLayout Grid.Column="0" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                                                    <Label Text="1:03 PM" FontAttributes="Bold" TextColor="Black"/>
+                                                    <Label Text="-" FontAttributes="Bold" TextColor="Black"/>
+                                                    <Label Text="2:33 PM" FontAttributes="Bold" TextColor="Black"/>
+                                                    <Label Text=" : " FontAttributes="Bold" TextColor="Black"/>
+                                                    <Label Text="Fadel"  TextColor="Black"/>
+                                                </StackLayout>
+
+                                                <Label Grid.Column="1" Text="RM 52.5" HorizontalOptions="Center" FontSize="13" FontAttributes="Bold" TextColor="Blue"/>
+                                            </Grid>
+                                            
+                                        </StackLayout>-->
+
+                                        <!--BindableLayout.ItemsSource="{Binding BindingContext.BookingMember , Source={x:Reference MyPage}}" ...  .... BindableLayout.ItemsSource="{Binding Source={x:Reference root},Path=BindingContext.BookingMember}" ... BindableLayout.ItemsSource="{Binding BookingMember}"-->
+                                        <StackLayout BindableLayout.EmptyView="No Bookings" BindableLayout.ItemsSource="{Binding BookingMember}" HorizontalOptions="Start" VerticalOptions="Center" Margin="20,0,0,20">
                                             <BindableLayout.ItemTemplate>
                                                 <DataTemplate>
                                                     <Grid>

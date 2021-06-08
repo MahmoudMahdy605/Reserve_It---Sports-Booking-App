@@ -94,12 +94,15 @@ namespace SportsBookingApp.ViewModels
                 return;
             if (!double.TryParse(selectedCenter.CenterLongitude.ToString(), out double lng))
                 return;
+            
             await Map.OpenAsync(lat, lng, new MapLaunchOptions
             {
-                Name = selectedCenter.CenterName.ToString(),
+                Name = selectedCenter.CenterName,
                 NavigationMode = NavigationMode.None
 
             });
+            
+
 
 
             //await Application.Current.MainPage.DisplayAlert("location ", " view location", "OK");

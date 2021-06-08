@@ -250,4 +250,13 @@
   <ItemGroup>
     <BundleResource Include="Resources\futsal_court3.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cancel_img.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\courts_management_img.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\data_analysis_img.png" />
+  </ItemGroup>
 </Project>

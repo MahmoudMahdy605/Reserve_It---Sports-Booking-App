@@ -5,7 +5,7 @@
 
 
     <!--Newest, need to add tahan code-->
-    
+
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -20,7 +20,7 @@
             <Label x:Name="SportName" Grid.Row="1" HeightRequest="40" Text="{Binding SelectedSport.SportName }" TextColor="White" FontSize="30"   
                    HorizontalOptions="Start" VerticalOptions="Center" Margin="20,0,0,0"/>
 
-            <pancake:PancakeView Grid.Row="2" Padding="20,13,20,0" CornerRadius="25,25,0,0" BackgroundColor="Wheat">
+            <pancake:PancakeView Grid.Row="2" Padding="20,13,20,0" CornerRadius="25,25,0,0">
                 <Grid RowSpacing="15">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -64,19 +64,14 @@
                                                                 <Label Text="{Binding CenterName}" TextColor="#3C3E43" FontSize="22" FontAttributes="Bold"
                                                                    VerticalOptions="Center" HorizontalOptions="Start"/>
                                                             </StackLayout>
-                                                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Margin="0,0,5,0" Spacing="5">
-                                                                <Image Source="star_img.png" VerticalOptions="Center" HeightRequest="25" WidthRequest="25" />
-                                                                <Label Text="{Binding CenterRating}" FontSize="17" VerticalOptions="Center" TextColor="Blue"/>
+                                                            <StackLayout WidthRequest="60" Orientation="Horizontal" HorizontalOptions="EndAndExpand" Margin="0,0,5,0" Spacing="5">
+                                                                <Image HorizontalOptions="End" Source="star_img.png" VerticalOptions="Center" HeightRequest="25" WidthRequest="25" />
+                                                                <Label HorizontalOptions="End" Text="{Binding CenterRating}" FontSize="18" VerticalOptions="Center" TextColor="Blue"/>
                                                             </StackLayout>
                                                         </StackLayout>
 
                                                         <StackLayout Orientation="Horizontal" >
-                                                            <ImageButton Source="map_icon_80.png" Command="{Binding OpenGoogleMapLocationCommand}" VerticalOptions="Center" HeightRequest="25" WidthRequest="25"/>
-                                                            <!--<Image Source="map_icon_80.png" VerticalOptions="Center" HeightRequest="25" WidthRequest="25">
-                                                                <Image.GestureRecognizers>
-                                                                    <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding OpenGoogleMapLocationCommand}"/>
-                                                                </Image.GestureRecognizers>
-                                                            </Image>-->
+                                                            <Image Source="map_icon_80.png" VerticalOptions="Center" HeightRequest="25" WidthRequest="25" />
                                                             <Label Text="Location" FontSize="17" VerticalOptions="Center" TextColor="Blue">
                                                                 <Label.GestureRecognizers>
                                                                     <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding OpenGoogleMapLocationCommand}"/>
@@ -106,4 +101,110 @@
         </Grid>
 
     </ContentPage.Content>
+
+    <!--<ContentPage.Content>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Frame Grid.Row="0" BackgroundColor="Black" Padding="0" HeightRequest="200" Grid.RowSpan="2">
+            <Image Source="{Binding SelectedSport.SportImage}" Aspect="AspectFill"/>
+        </Frame>
+        <Label x:Name="SportName" Grid.Row="1" HeightRequest="40" Text="{Binding SelectedSport.SportName }" TextColor="White" FontSize="30"   
+                   HorizontalOptions="Start" VerticalOptions="Center" Margin="20,0,0,0"/>
+
+        <pancake:PancakeView Grid.Row="2" Padding="20,13,20,0" CornerRadius="25,25,0,0" BackgroundColor="Wheat">
+            <Grid RowSpacing="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" HorizontalOptions="Start" VerticalOptions="Start" Text="{Binding TotalCenters, StringFormat='{0} Total Centers'}"
+                           TextColor="Black" FontAttributes="Bold"/>
+
+                <CollectionView Grid.Row="1" ItemsSource="{Binding CentersItemsBySport}"
+                                    VerticalOptions="Start" HorizontalOptions="FillAndExpand"
+                                    SelectionMode="Single" VerticalScrollBarVisibility="Never"
+                                    SelectionChanged="CentersCollectionView_SelectionChanged"
+                                    EmptyView="No items to display">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <ContentView  Padding="25,0,25,10">
+                                <Frame Padding="0,0,0,9" CornerRadius="25" HasShadow="True" BorderColor="Gainsboro" >
+                                    <StackLayout >
+                                        <Grid RowSpacing="11">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Frame Grid.Row="0" HasShadow="True" HeightRequest="180" WidthRequest="150" Padding="0" CornerRadius="20">
+                                                <Frame Padding="0"  >
+                                                    <Image Source="{Binding CenterImage}" Aspect="AspectFit"/>
+                                                </Frame>
+                                            </Frame>
+                                            <Grid Grid.Row="1" Padding="10,0,5,5">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="70"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <StackLayout Grid.Column="0" >
+
+                                                    <StackLayout Orientation="Horizontal" Padding="5,0">
+                                                        <StackLayout>
+                                                            <Label Text="{Binding CenterName}" TextColor="#3C3E43" FontSize="22" FontAttributes="Bold"
+                                                                   VerticalOptions="Center" HorizontalOptions="Start"/>
+                                                        </StackLayout>
+                                                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Margin="0,0,5,0" Spacing="5">
+                                                            <Image Source="star_img.png" VerticalOptions="Center" HeightRequest="25" WidthRequest="25" />
+                                                            <Label Text="{Binding CenterRating}" FontSize="17" VerticalOptions="Center"  TextColor="Blue"/>
+                                                        </StackLayout>
+                                                    </StackLayout>
+
+                                                    <StackLayout Orientation="Horizontal" >
+                                                        <ImageButton Source="map_icon_80.png" Command="{Binding OpenGoogleMapLocationCommand}" VerticalOptions="Center" HeightRequest="25" WidthRequest="25"/>
+<Image Source="map_icon_80.png" VerticalOptions="Center" HeightRequest="25" WidthRequest="25">
+                                                                <Image.GestureRecognizers>
+                                                                    <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding OpenGoogleMapLocationCommand}"/>
+                                                                </Image.GestureRecognizers>
+</Image>
+                                                        <Label Text="Location" FontSize="17" VerticalOptions="Center" TextColor="Blue">
+                                                            <Label.GestureRecognizers>
+                                                                <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding OpenGoogleMapLocationCommand}"/>
+                                                            </Label.GestureRecognizers>
+                                                        </Label>
+                                                    </StackLayout>
+                                                </StackLayout>
+
+                                                <Frame Grid.Column="1" Margin="0,0,8,0" Padding="0" CornerRadius="50" BorderColor="Blue" VerticalOptions="Center" HorizontalOptions="Center" >
+                                                    <Image Source="right_arrow_80.png" Aspect="AspectFill" />
+                                                </Frame>
+
+                                            </Grid>
+                                        </Grid>
+                                    </StackLayout>
+                                </Frame>
+                            </ContentView>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+
+
+            </Grid>
+        </pancake:PancakeView>
+    </Grid>
+
+</ContentPage.Content>-->
+    
+    
 </ContentPage>
+
+    
+    

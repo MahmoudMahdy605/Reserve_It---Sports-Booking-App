@@ -20,8 +20,8 @@ namespace SportsBookingApp.Models
 
 
 
-        public ObservableCollection<Booking> BookingMember { get; set; }
-
+        //public ObservableCollection<Booking> BookingMember { get; set; }
+        public List<Booking> BookingMember { get; set; }
         public double TotalRevenueForTheCourtPerDay { get; set; }
 
     }

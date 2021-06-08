@@ -72,7 +72,7 @@
                 <Entry Placeholder="Name" Margin="10,-5,0,0"/>-->
 
                 <Label Text="Card Number : " FontAttributes="Bold" TextColor="Black" FontSize="20" Margin="15,10,0,0"/>
-                <Entry  x:Name="cardnumber" Placeholder="xxxxxxxxxxxxxxxx" MaxLength="16" Keyboard="Numeric" Margin="10,-5,0,0"/>
+                <Entry  x:Name="cardnumber" Placeholder="xxxxxxxxxxxxxxxx" MaxLength="16" Keyboard="Numeric" Margin="10,-5,0,0" IsPassword="True"/>
 
                 <Label Text="Expiry Year : " FontAttributes="Bold" TextColor="Black" FontSize="20" Margin="15,10,0,0"/>
                 <Entry x:Name="expiryYear" Placeholder="YYYY" MaxLength="4" Keyboard="Numeric" Margin="10,-5,0,0"/>

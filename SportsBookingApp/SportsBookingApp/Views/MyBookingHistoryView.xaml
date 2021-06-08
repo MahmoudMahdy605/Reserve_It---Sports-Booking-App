@@ -32,7 +32,8 @@
             </pv:PancakeView>
 
             <CollectionView Grid.Row="2" Margin="22" HorizontalOptions="End" VerticalOptions="FillAndExpand"
-                        SelectionMode="None" EmptyView="You dont have bookings on this date" ItemsSource="{Binding MyBookings}">
+                        EmptyView="You dont have bookings on this date" ItemsSource="{Binding MyBookings}"
+                            SelectionChanged="CancelBooking_SelectionChanged" SelectionMode="Single">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="20"/>
                 </CollectionView.ItemsLayout>
@@ -41,13 +42,14 @@
                         <pv:PancakeView BackgroundColor="LightGray" VerticalOptions="StartAndExpand" 
                                     HorizontalOptions="FillAndExpand">
                             <Grid VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
-                                
-                                <BoxView BackgroundColor="Crimson"  WidthRequest="3" HorizontalOptions="Start"
+
+                                <BoxView BackgroundColor="DarkSeaGreen"  WidthRequest="3" HorizontalOptions="Start"
                                      VerticalOptions="FillAndExpand"/>
                                 <Grid Padding="20">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     
                                     <StackLayout Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center">
@@ -69,9 +71,9 @@
                                         </Label>-->
                                         
                                         <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
-                                            <Label Text="{Binding StartingBookingTime, StringFormat='{}{0:h:mm tt}'}" VerticalOptions="Center" TextColor="#2F3246" FontSize="15"/>
+                                            <Label x:Name="startingbookingtime" Text="{Binding StartingBookingTime, StringFormat='{}{0:h:mm tt}'}" VerticalOptions="Center" TextColor="#2F3246" FontSize="15"/>
                                             <Label Text=" - "/>
-                                            <Label Text="{Binding EndingBookingTime, StringFormat='{}{0:h:mm tt}'}" VerticalOptions="Center" TextColor="#2F3246" FontSize="15"/>
+                                            <Label x:Name="endingbookingtime" Text="{Binding EndingBookingTime, StringFormat='{}{0:h:mm tt}'}" VerticalOptions="Center" TextColor="#2F3246" FontSize="15"/>
                                         </StackLayout>
 
                                         <!--<Label HorizontalOptions="Start" TextColor="#2F3246" FontSize="14">
@@ -84,13 +86,22 @@
                                                     </FormattedString.Spans>
                                                 </FormattedString>
                                             </Label.FormattedText>
+                                        
                                         </Label>-->
                                         
                                     </StackLayout>
                                     
                                     <StackLayout Grid.Column="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                        <Label Text="{Binding TotalPaymentAmount, StringFormat='RM {0} '}" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" TextColor="OrangeRed" FontSize="18" FontAttributes="Bold" />
+                                        <Label Text="{Binding TotalPaymentAmount, StringFormat='RM {0} '}" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" HorizontalOptions="Start" TextColor="Blue" FontSize="18" FontAttributes="Bold" />
                                     </StackLayout>
+
+                                    <!--<Image.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Command="CancelBooking"/>
+                                    </Image.GestureRecognizers> -->
+                                
+                                    <Frame Grid.Column="2" Margin="0,0,8,0" Padding="0" WidthRequest="50" HeightRequest="50" CornerRadius="50" BorderColor="LightGray" VerticalOptions="Center" HorizontalOptions="Center" >
+                                        <Image Source="cancel_img" Aspect="AspectFill" />
+                                    </Frame>
                                     
                                 </Grid>
 
