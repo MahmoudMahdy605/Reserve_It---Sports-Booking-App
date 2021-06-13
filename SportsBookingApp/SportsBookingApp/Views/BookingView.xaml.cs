@@ -3,6 +3,7 @@ using SportsBookingApp.Services;
 using SportsBookingApp.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace SportsBookingApp.Views
         Center c;
         string s;
 
+
         public BookingView(Center center, string sportname)
         {
             InitializeComponent();
@@ -31,11 +33,13 @@ namespace SportsBookingApp.Views
             c = center;
             s = sportname;
 
-            SelectedStartingBookingTime.Time = System.DateTime.Now.TimeOfDay;
-            SelectedEndingBookingTime.Time = SelectedStartingBookingTime.Time;
+            SelectedStartingBookingTime.Time = System.DateTime.Now.AddHours(8).TimeOfDay;
+            //SelectedEndingBookingTime.Time = SelectedStartingBookingTime.Time;
+            SelectedEndingBookingTime.Time = System.DateTime.Now.AddHours(9).TimeOfDay;
 
             asm = new BookingViewModel(center, sportname);
             this.BindingContext = asm;
+
 
             /*
             this.BindingContext = this;
@@ -50,27 +54,92 @@ namespace SportsBookingApp.Views
 
         }
         
+        
         private async void SelectedBookingDate_DateSelected(object sender, DateChangedEventArgs e)
         {
-
-            // asm = new BookingViewModel(c, s, SelectedCourt.SelectedItem.ToString(), SelectedBookingDate.Date);
-
-            //asm = new BookingViewModel(c, s, SelectedCourt.SelectedItem.ToString());
-
+            
             asm = new BookingViewModel(c, s);
-            //asm = new BookingViewModel(c, s, SelectedCourt.SelectedItem.ToString(), SelectedBookingDate.Date.DayOfWeek);
             
             this.BindingContext = asm;
-                
             
         }
+        
+
+        /*
+        private void OnPickerSelectedIndexChanged(object sender, EventArgs e)
+        {
+            var picker = (Picker)sender;
+            int selectedIndex = picker.SelectedIndex;
+
+
+            try
+            {
+                if (selectedIndex != -1)
+                {
+                    Application.Current.MainPage.DisplayAlert("ok", "index not negative", "OK");
+
+                    asm = new BookingViewModel(c, s, (string)picker.ItemsSource[selectedIndex] , SelectedBookingDate.Date);
+                    this.BindingContext = asm;
+
+                    //SelectedCourt.SelectedItem = (string)picker.ItemsSource[selectedIndex];
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Application.Current.MainPage.DisplayAlert("error", ex.Message, "OK");
+            }
+        }
+        */
 
         private void CheckAvailability_Clicked(object sender, EventArgs e)
         {
-            asm = new BookingViewModel(c, s, SelectedCourt.SelectedItem.ToString(), SelectedBookingDate.Date);
+            try
+            {
+                if (SelectedCourt.SelectedItem != null)
+                {
+                    asm = new BookingViewModel(c, s, SelectedCourt.SelectedItem.ToString(), SelectedBookingDate.Date);
 
-            SelectedCourt.SelectedItem = SelectedCourt.SelectedItem;
-            this.BindingContext = asm;
+                    //SelectedCourt.SelectedItem = SelectedCourt.SelectedItem;
+                    this.BindingContext = asm;
+                }
+                else Application.Current.MainPage.DisplayAlert("Missing information", "Please select your venue", "OK");
+
+            }
+            catch (Exception ex)
+            {
+                Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            
+
+        }
+
+        //async Task EndingBookingTimePickerPropertyChanged(object sender, PropertyChangedEventArgs args)
+
+        /*
+        void EndingBookingTimePickerPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+
+            if (SelectedCourt.SelectedItem is "Any")
+            {
+                _ = goo();
+            }
+
+
+        }
+        */
+
+        private async Task goo ()
+        {
+            string NameOfCourtHavingSpaceAtThisTime = await new BookingDataService().FindNameOfCourtHavingSpaceAtThisTimeAsync(c.CenterName, SelectedBookingDate.Date, SelectedStartingBookingTime.Time, SelectedEndingBookingTime.Time, s);
+
+            if (NameOfCourtHavingSpaceAtThisTime != "Conflicting")
+            {
+                SelectedCourt.SelectedItem = NameOfCourtHavingSpaceAtThisTime;
+            }
+            else await Application.Current.MainPage.DisplayAlert("Booking time is not available ", " Please select another time", "OK");
+
         }
 
 
@@ -87,6 +156,11 @@ namespace SportsBookingApp.Views
             // Do chack time quarters/halves.
             // Do chack time quarters/halves.
 
+            if (SelectedCourt.SelectedItem is "Any")
+            {
+                _ = goo();
+            }
+
             if (VerifyTimeSequence (SelectedStartingBookingTime.Time, SelectedEndingBookingTime.Time) == true )
             {
                 if(VerifyWorkingTime(SelectedStartingBookingTime.Time, SelectedEndingBookingTime.Time) == true)
@@ -102,9 +176,14 @@ namespace SportsBookingApp.Views
 
                             await Application.Current.MainPage.DisplayAlert("Booking time is available ", " Proceed with payment", "OK"); // successful booking time
 
-                            
+                            double selectedTimeDuration;
                             double paymentCostScale = double.Parse(CourtPaymentCostScale.Text);
-                            double selectedTimeDuration = ((int)SelectedEndingBookingTime.Time.TotalMinutes - (int)SelectedStartingBookingTime.Time.TotalMinutes);
+                            if ((int)SelectedEndingBookingTime.Time.TotalMinutes > (int)SelectedStartingBookingTime.Time.TotalMinutes)
+                            {
+                                selectedTimeDuration = ((int)SelectedEndingBookingTime.Time.TotalMinutes - (int)SelectedStartingBookingTime.Time.TotalMinutes);
+                            }
+                            else selectedTimeDuration = ((int)SelectedEndingBookingTime.Time.TotalMinutes + ( 1440 - (int)SelectedStartingBookingTime.Time.TotalMinutes) );
+
                             double TotalPaymentAmount = ( paymentCostScale * selectedTimeDuration ) / 60.0 ;
 
 
@@ -116,8 +195,8 @@ namespace SportsBookingApp.Views
                     }
                     catch 
                     {
-
-                        await Application.Current.MainPage.DisplayAlert("Error for conflict booking", "e.Message", "OK");
+                        //await Application.Current.MainPage.DisplayAlert("Error for conflict booking", "e.Message", "OK");
+                        await Application.Current.MainPage.DisplayAlert("Missing information", "Please select your venue", "OK");
                     }
                     
                    
@@ -148,18 +227,30 @@ namespace SportsBookingApp.Views
             Application.Current.MainPage.DisplayAlert("openTime", openTime.ToString(), "OK");
             Application.Current.MainPage.DisplayAlert("closeTime", closeTime.ToString(), "OK");
             */
+            
 
             if ((startingtime >= openTime || startingtime <= closeTime) && (endingtime >= openTime || endingtime <= closeTime))
             {
                 return true; // Open 
             }
             return false; // Closed 
+
+            // (int)endingtime.TotalHours <= 2 && (int)endingtime.TotalMinutes <= 120
+
         }
         private bool VerifyTimeSequence(TimeSpan startingtime, TimeSpan endingtime)
         {
+            /*
+            DateTime sta = Convert.ToDateTime(startingtime.ToString());
+            DateTime end = Convert.ToDateTime(endingtime.ToString());
+            */
 
-
-            if ((startingtime < endingtime))
+            /*
+            if (((startingtime.TotalHours < 12) && (endingtime.TotalHours < 12) && (startingtime < endingtime)) || ((startingtime.TotalHours > 12) && (startingtime.TotalHours <= 23) && (endingtime.TotalHours > 12) && (endingtime.TotalHours <= 23) && (startingtime < endingtime))
+                || ((startingtime.TotalHours < 12) && (endingtime.TotalHours > 12)) || ((startingtime.TotalHours <= 23) && (endingtime.TotalHours >= 0)))
+            */
+            
+            if ( (startingtime.TotalMinutes < endingtime.TotalMinutes) || ((int)startingtime.TotalHours <= 23  && (int)endingtime.TotalHours >= 0 ) && (int)endingtime.TotalHours <= 2)
             {
                 return true; // startingtime is before endingtime 
             }

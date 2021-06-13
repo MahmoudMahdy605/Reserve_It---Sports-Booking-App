@@ -13,7 +13,6 @@ namespace SportsBookingApp.ViewModels
 {
     public class BookingViewModel : BaseViewModel
     {
-
         public BookingViewModel(Center center, string sportname)
         {
 
@@ -25,6 +24,9 @@ namespace SportsBookingApp.ViewModels
             SelectedCenter = center;
             GetCourts(center.CenterName, sportname);
 
+            //GetSelectedCourtData(center.CenterName, CourtsNames[0]);
+
+            BookedSlots = new ObservableCollection<Booking>();
 
             OpenGoogleMapLocationCommand = new Command(async () => await OpenGoogleMapLocationCommandAsync(SelectedCenter));
             //BookingCommand = new Command(async () => await BookingCommandAsync());
@@ -69,7 +71,7 @@ namespace SportsBookingApp.ViewModels
             SelectedCenter = center;
             GetCourts(center.CenterName, sportname);
 
-            GetSelectedCourtData(center.CenterName, courtname);
+            //GetSelectedCourtData(center.CenterName, courtname);
 
             BookedSlots = new ObservableCollection<Booking>();
             GetBookedSlots(center.CenterName, courtname,  bookingdate);
@@ -110,7 +112,6 @@ namespace SportsBookingApp.ViewModels
             // await _navigationService.GoBackAsync();
         }
         public ObservableCollection<Booking> BookedSlots { get; set; }
-
 
         private async void GetBookedSlots(string centerName, string courtName, DateTime bookingdate)
         {
@@ -199,10 +200,14 @@ namespace SportsBookingApp.ViewModels
             var data = await new CourtDataService().GetCourtsNamesBySportAndCenterAsync(selectedCenterName, selectedSportName);
 
             CourtsNames.Clear();
+            CourtsNames.Add("Any");
             foreach (var item in data)
             {
                 CourtsNames.Add(item);
             }
+
+
+            GetSelectedCourtData(selectedCenterName, CourtsNames[1]);
 
         }
 

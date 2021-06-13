@@ -63,11 +63,22 @@ namespace SportsBookingApp.Services
 
         public async Task<bool> CheckForConflictBookingAsync(string centerName, DateTime bookingDate, string courtName, TimeSpan startingTime, TimeSpan endingTime)
         {   
-            var allbookingsof = (await GetBookingsItemsAsync()).Where(p => p.CenterName == centerName).Where(p => p.BookingDate.Date == bookingDate.Date).Where(p => p.CourtName == courtName).ToList();
-
+            var allbookingsof = (await GetBookingsItemsAsync()).Where(p => p.CenterName == centerName).Where(p => p.BookingDate.Date == bookingDate.Date).Where(p => p.CourtName == courtName).ToList(); // Why we write this line!!?
+            
             var ConfilctBooking = (await GetBookingsItemsAsync()).Where(p => p.CenterName == centerName).Where(p => p.BookingDate.Date == bookingDate.Date).Where(p => p.CourtName == courtName)
-                .Where(p => ( (p.StartingBookingTime.TimeOfDay.TotalSeconds  < startingTime.TotalSeconds) && (p.EndingBookingTime.TimeOfDay.TotalSeconds > startingTime.TotalSeconds) ) ||
-                ((p.EndingBookingTime.TimeOfDay.TotalSeconds > endingTime.TotalSeconds) && (p.StartingBookingTime.TimeOfDay.TotalSeconds < endingTime.TotalSeconds))).ToList();
+                .Where(p => ((p.StartingBookingTime.TimeOfDay.TotalSeconds < startingTime.TotalSeconds) && (p.EndingBookingTime.TimeOfDay.TotalSeconds > startingTime.TotalSeconds)) ||
+                ((p.EndingBookingTime.TimeOfDay.TotalSeconds > endingTime.TotalSeconds) && (p.StartingBookingTime.TimeOfDay.TotalSeconds < endingTime.TotalSeconds)) ||
+                ((p.StartingBookingTime.TimeOfDay.TotalSeconds < startingTime.TotalSeconds) && (p.EndingBookingTime.TimeOfDay.TotalSeconds > endingTime.TotalSeconds) && ((endingTime.TotalMinutes >= 120 && p.EndingBookingTime.TimeOfDay.TotalMinutes >= 120) || (endingTime.TotalMinutes >= 0 && endingTime.TotalMinutes <= 120 && p.EndingBookingTime.TimeOfDay.TotalMinutes >= 0 && p.EndingBookingTime.TimeOfDay.TotalMinutes <= 120))) ||
+                ((p.StartingBookingTime.TimeOfDay.TotalSeconds > startingTime.TotalSeconds) && (p.EndingBookingTime.TimeOfDay.TotalSeconds < endingTime.TotalSeconds) && ((endingTime.TotalMinutes >= 120 && p.EndingBookingTime.TimeOfDay.TotalMinutes >= 120) || (endingTime.TotalMinutes >= 0 && endingTime.TotalMinutes <= 120 && p.EndingBookingTime.TimeOfDay.TotalMinutes >= 0 && p.EndingBookingTime.TimeOfDay.TotalMinutes <= 120)))).ToList();
+            
+            /*
+            var ConfilctBooking = (await GetBookingsItemsAsync()).Where(p => p.CenterName == centerName).Where(p => p.BookingDate.Date == bookingDate.Date).Where(p => p.CourtName == courtName)
+                .Where(p => ((p.StartingBookingTime.TimeOfDay.TotalSeconds < startingTime.TotalSeconds) && (p.EndingBookingTime.TimeOfDay.TotalSeconds > startingTime.TotalSeconds)) ||
+                ((p.EndingBookingTime.TimeOfDay.TotalSeconds > endingTime.TotalSeconds) && (p.StartingBookingTime.TimeOfDay.TotalSeconds < endingTime.TotalSeconds)) ||
+                ((p.StartingBookingTime.TimeOfDay.TotalSeconds > startingTime.TotalSeconds) && (p.EndingBookingTime.TimeOfDay.TotalSeconds < endingTime.TotalSeconds))).ToList();
+            */
+
+            // || ((p.StartingBookingTime.TimeOfDay.TotalSeconds > startingTime.TotalSeconds) && (p.EndingBookingTime.TimeOfDay.TotalSeconds < endingTime.TotalSeconds) && (p.EndingBookingTime.TimeOfDay.TotalSeconds > startingTime.TotalSeconds))
 
             if (ConfilctBooking.Count >= 1) return false;
             else return true;
@@ -116,6 +127,80 @@ namespace SportsBookingApp.Services
             }
 
             return TotalNoOfBookingsBetweenDates;
+        }
+
+        public async Task<string> GetPreferredBookedSlotsTimesForACenterBetweenTwoDatesAsync(string centerName, string sportName, DateTime startingBookingDate, DateTime endingBookingDate)
+        {
+
+            int Mornings, AfterNoons, Evenings, NumberOfBookings ;
+            Mornings = AfterNoons = Evenings = NumberOfBookings = 0;
+
+            var items = (await GetBookingsItemsAsync()).Where(p => p.CenterName == centerName).Where(p => p.SportName == sportName).Where(p => p.BookingDate.Date >= startingBookingDate.Date)
+                .Where(p => p.BookingDate.Date <= endingBookingDate.Date).ToList();
+
+            foreach (var item in items)
+            {
+                NumberOfBookings++;
+
+                if (item.StartingBookingTime.TimeOfDay.TotalHours >= 8 && item.EndingBookingTime.TimeOfDay.TotalHours <= 12) Mornings++;
+                else if (item.StartingBookingTime.TimeOfDay.TotalHours > 12 && item.EndingBookingTime.TimeOfDay.TotalHours <= 18) AfterNoons++;
+                else if ( (item.StartingBookingTime.TimeOfDay.TotalHours > 18 && item.EndingBookingTime.TimeOfDay.TotalHours <= 23) || (item.StartingBookingTime.TimeOfDay.TotalHours >= 0 && item.EndingBookingTime.TimeOfDay.TotalHours <= 2)) Evenings++;
+            }
+
+            if (NumberOfBookings > 0)
+            {
+                if (Mornings > AfterNoons)
+                {
+                    if (Mornings > Evenings)
+                    {
+                        return "Mornings";
+                    }
+                    else
+                    {
+                        return "Evenings";
+                    }
+                }
+                else if (AfterNoons > Evenings)
+                    return "AfterNoons";
+                else
+                    return "Evenings";
+
+            }
+            else return "No Bookings";
+
+        }
+
+        public async Task<string> FindNameOfCourtHavingSpaceAtThisTimeAsync(string centerName, DateTime bookingDate, TimeSpan startingTime, TimeSpan endingTime, string sportName)
+        {
+            /*
+            var allbookingsof = (await GetBookingsItemsAsync()).Where(p => p.CenterName == centerName).Where(p => p.BookingDate.Date == bookingDate.Date)
+                .Where(p => p.StartingBookingTime.TimeOfDay.TotalMinutes == startingTime.TotalMinutes).Where(p => p.EndingBookingTime.TimeOfDay.TotalMinutes == endingTime.TotalMinutes).ToList();
+            */
+
+            var ConfilctBooking = (await GetBookingsItemsAsync()).Where(p => p.CenterName == centerName).Where(p => p.BookingDate.Date == bookingDate.Date)
+                .Where(p => ((p.StartingBookingTime.TimeOfDay.TotalSeconds < startingTime.TotalSeconds) && (p.EndingBookingTime.TimeOfDay.TotalSeconds > startingTime.TotalSeconds)) ||
+                ((p.EndingBookingTime.TimeOfDay.TotalSeconds > endingTime.TotalSeconds) && (p.StartingBookingTime.TimeOfDay.TotalSeconds < endingTime.TotalSeconds)) ||
+                ((p.StartingBookingTime.TimeOfDay.TotalSeconds > startingTime.TotalSeconds) && (p.EndingBookingTime.TimeOfDay.TotalSeconds < endingTime.TotalSeconds))).ToList();
+
+
+            var AllCourtsNames = await new CourtDataService().GetCourtsNamesBySportAndCenterAsync(centerName, sportName);
+            
+            int n = 1;
+
+            foreach (string courtname in AllCourtsNames)
+            {
+                foreach (var booking in ConfilctBooking)
+                {
+                    if (courtname == booking.CourtName) n = 0;
+                }
+
+                if (n == 1) return courtname;
+
+                n = 1;
+            }
+
+            return "Conflicting";
+                
         }
 
 

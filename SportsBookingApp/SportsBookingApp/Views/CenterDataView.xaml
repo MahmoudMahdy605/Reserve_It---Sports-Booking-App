@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Class="SportsBookingApp.Views.CenterDataView">
 
     <ContentPage.Content>
@@ -24,61 +24,115 @@
                    Margin="0,0,20,0"
                    WidthRequest="40" HeightRequest="40"/>
             </StackLayout>
-            
-            
-            
-            <Grid BackgroundColor="White" Padding="2,0,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="230"/>
-                    <RowDefinition Height="80"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid>
-                    <StackLayout Grid.Row="0" BackgroundColor="Beige">
-                        
-                        <Label VerticalOptions="Center" HorizontalOptions="Start" Padding="8"
-                       TextColor="DarkBlue" FontSize="30" FontAttributes="Bold">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text=" Welcome "/>
-                                    <Span Text="{Binding CenterName}"/>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        
-                        <Label Text="Select Period" FontSize="25" FontAttributes="Bold" TextColor="Brown" HorizontalOptions="Center" VerticalOptions="Center" Margin="-5,20,0,0"/>
-                        
-                        <Label Text="From" FontSize="17" FontAttributes="Bold" Opacity=".7" HorizontalOptions="Start" Margin="68,20,0,0"/>
 
-                        <DatePicker x:Name="StartingBookingDate" VerticalOptions="Start" FontAttributes="Bold" HorizontalOptions="Start" Margin="40,5,0,0"/>
-                        
-                        <Label Text="-----------" HorizontalOptions="Center" Margin="0,-35,0,20"/>
+            <ScrollView>
 
-                        <DatePicker x:Name="EndingBookingDate" VerticalOptions="End" FontAttributes="Bold" HorizontalOptions="End" Margin="0,-63,40,0"/>
-                        
-                        <Label Text="To" FontSize="17" FontAttributes="Bold" Opacity=".7" HorizontalOptions="End" Margin="-20,-85,80,0"/>
-                        
-                    </StackLayout>
-                </Grid>
-                    
-                <Grid Grid.Row="1">
-                    <Button Text="View Data" Clicked="ViewData_Clicked"  FontAttributes="Bold" TextColor="White" FontSize="17" CornerRadius="10" 
-                        BackgroundColor="DarkMagenta"  HorizontalOptions="Center" VerticalOptions="Center"/>
-                </Grid>
-                
-                <Grid Grid.Row="2" BackgroundColor="Beige" Padding="20,15">
+                <Grid BackgroundColor="White" Padding="2,0,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="230"/>
+                        <RowDefinition Height="80"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
+                    <Grid>
+                        <StackLayout Grid.Row="0" BackgroundColor="Beige">
 
-                    <Label Grid.Row="0" Text="Total Revenue : " FontSize="25" FontAttributes="Bold" TextColor="DarkOliveGreen" HorizontalOptions="Start" />
-                    <Label Grid.Row="0" Text="{Binding TotalRevenue, StringFormat='RM {0} '}" FontSize="25" FontAttributes="Bold" TextColor="Red" HorizontalOptions="End" />
-                    <Label Grid.Row="1" Text="Total No. of Bookings : " FontSize="25" TextColor="Brown"  FontAttributes="Bold" HorizontalOptions="Start" />
-                    <Label Grid.Row="1" Text="{Binding TotalNoOfBookings}" FontSize="25" FontAttributes="Bold" TextColor="Red" HorizontalOptions="End" />
-                        
+                            <Label VerticalOptions="Center" HorizontalOptions="Start" Padding="8"
+                       TextColor="DarkBlue" FontSize="30" FontAttributes="Bold">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text=" Welcome "/>
+                                        <Span Text="{Binding CenterName}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label Text="Select Period" FontSize="25" FontAttributes="Bold" TextColor="Brown" HorizontalOptions="Center" VerticalOptions="Center" Margin="-5,10,0,0"/>
+
+                            <Label Text="From" FontSize="17" FontAttributes="Bold" Opacity=".7" HorizontalOptions="Start" Margin="68,20,0,0"/>
+
+                            <DatePicker x:Name="StartingBookingDate" VerticalOptions="Start" FontAttributes="Bold" HorizontalOptions="Start" Margin="40,5,0,0"/>
+
+                            <Label Text="-----------" HorizontalOptions="Center" Margin="0,-35,0,20"/>
+
+                            <DatePicker x:Name="EndingBookingDate" VerticalOptions="End" FontAttributes="Bold" HorizontalOptions="End" Margin="0,-63,40,0"/>
+
+                            <Label Text="To" FontSize="17" FontAttributes="Bold" Opacity=".7" HorizontalOptions="End" Margin="-20,-85,80,0"/>
+
+                        </StackLayout>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Button Text="View Data" Clicked="ViewData_Clicked"  FontAttributes="Bold" TextColor="White" FontSize="17" CornerRadius="10" 
+                        BackgroundColor="DarkMagenta"  HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2" BackgroundColor="White" Padding="20,15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Text="Total Revenue : " FontSize="25" FontAttributes="Bold" TextColor="DarkOliveGreen" HorizontalOptions="Start" />
+                        <Label Grid.Row="0" Text="{Binding TotalRevenue, StringFormat='RM {0} '}" FontSize="25" FontAttributes="Bold" TextColor="Red" HorizontalOptions="End" />
+                        <Label Grid.Row="1" Text="Total No. of Bookings : " FontSize="25" TextColor="Brown"  FontAttributes="Bold" HorizontalOptions="Start" />
+                        <Label Grid.Row="1" Text="{Binding TotalNoOfBookings}" FontSize="25" FontAttributes="Bold" TextColor="Red" HorizontalOptions="End" />
+
+                    </Grid>
+
+
+
+                    <pv:PancakeView Grid.Row="3" Margin="20,0,20,0" Padding="0,0,0,50" BackgroundColor="White" VerticalOptions="StartAndExpand" 
+                                    HorizontalOptions="FillAndExpand">
+                        <Grid VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <BoxView BackgroundColor="Crimson"  WidthRequest="3" HorizontalOptions="Start"
+                                     VerticalOptions="FillAndExpand"/>
+                            <xct:Expander Grid.Column="1">
+                                <xct:Expander.Header>
+                                    
+                                    <StackLayout Grid.Column="0" Padding="5" HorizontalOptions="Start" VerticalOptions="Center">
+                                        <Label Text="Frequent Booking Time" HorizontalOptions="StartAndExpand" TextColor="Black" FontAttributes="Bold" FontSize="21"/>
+                                    </StackLayout>
+                                    
+                                </xct:Expander.Header>
+
+                                <StackLayout Grid.Column="2" Spacing="10" Padding="0,15,0,0" BindableLayout.EmptyView="Select a date period" BindableLayout.ItemsSource="{Binding PreferredbookingTimes}" HorizontalOptions="Start" VerticalOptions="Center" Margin="20,0,0,20">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            
+                                            <Grid VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                
+                                                <StackLayout Grid.Column="0" Orientation="Horizontal" VerticalOptions="Center">
+                                                    <Label Text="{Binding SportName}" FontAttributes="Bold" FontSize="16" TextColor="Black"/>
+                                                    <Label Text=":" FontAttributes="Bold" TextColor="Black"/>
+                                                </StackLayout>
+
+                                                <Label Grid.Column="1" Text="{Binding PreferredTime}" VerticalOptions="Center" HorizontalOptions="Start" FontSize="15" FontAttributes="Bold" TextColor="Blue"/>
+                                            </Grid>
+                                            
+
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+
+                            </xct:Expander>
+                        </Grid>
+                    </pv:PancakeView>
+                    
+                    
+                    
                 </Grid>
-            </Grid>
+            </ScrollView>
+            
         </StackLayout>
     </ContentPage.Content>
 
