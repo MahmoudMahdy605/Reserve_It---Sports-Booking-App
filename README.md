@@ -11,7 +11,7 @@
 4- Provide online payment approach, and more.
 
 <br />
-#See how our app works: https://drive.google.com/file/d/1HzzzVAfvhz-rKpOBSYgnEFQDteo1A7MD/view?usp=sharing <br />
+*See how our app works: https://drive.google.com/file/d/1HzzzVAfvhz-rKpOBSYgnEFQDteo1A7MD/view?usp=sharing <br />
 
 <br />
 *Visit our website for more information : https://moustafacena1997.wixsite.com/reserve-it <br />
