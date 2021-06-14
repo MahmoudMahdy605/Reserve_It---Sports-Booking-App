@@ -1,6 +1,6 @@
 # Reserve It, A Sports Booking App ( still under progress, 90% done )
 
-Reserve It is a cross-platform mobile app made for sport centers' owners to: 
+"Reserve It" is a cross-platform mobile app made for sport centers' owners to: 
 <br /><br />
 1- Organize all reservation data.
 
@@ -11,13 +11,13 @@ Reserve It is a cross-platform mobile app made for sport centers' owners to:
 4- Provide online payment approach, and more.
 
 <br />
-See how our app works: https://drive.google.com/file/d/1HzzzVAfvhz-rKpOBSYgnEFQDteo1A7MD/view?usp=sharing <br />
+*See how our app works: https://drive.google.com/file/d/1HzzzVAfvhz-rKpOBSYgnEFQDteo1A7MD/view?usp=sharing <br />
 
 <br />
-Visit our website for more information : https://moustafacena1997.wixsite.com/reserve-it <br />
+*Visit our website for more information : https://moustafacena1997.wixsite.com/reserve-it <br />
 
 <br />
-This project is still under progress and coded for our Integrated Design Project (IDP) course, at International islamic university Malaysia (IIUM).
+*This project is still under progress and coded for our Integrated Design Project (IDP) course, at International islamic university Malaysia (IIUM).
 Project duration is from 10/April/2021 until 10/June/2021. Coded in c# and Xamarin.forms using Visual Studio 2019.<br />
 
 
@@ -52,13 +52,15 @@ Project duration is from 10/April/2021 until 10/June/2021. Coded in c# and Xamar
 <br /><br />
 *You can View some of the project UI pages from " UI pages " folder.
 
-
-<br /><br />
+<br />
 *In case you like to run our project:<br /> 
 
 To login in as USER ====> username: m    , password : m
 
 To login in as ADMIN ====> username: BBC Futsal Center    , password : 0000
+
+
+
 
 <br>
 *Things need to be modified: <br>
