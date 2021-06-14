@@ -11,7 +11,7 @@
 4- Provide online payment approach, and more.
 
 <br />
-*See how our app works: https://drive.google.com/file/d/1HzzzVAfvhz-rKpOBSYgnEFQDteo1A7MD/view?usp=sharing <br />
+#See how our app works: https://drive.google.com/file/d/1HzzzVAfvhz-rKpOBSYgnEFQDteo1A7MD/view?usp=sharing <br />
 
 <br />
 *Visit our website for more information : https://moustafacena1997.wixsite.com/reserve-it <br />
@@ -33,8 +33,7 @@ Project duration is from 10/April/2021 until 10/June/2021. Coded in c# and Xamar
 
 4- Tasnimul Hasan: responsible 30% of front-end code using xaml.
 
-
-<br /><br />
+<br />
 *Until now ( 14/June/2021) Application working Functionalities:<br />
 
 1- Clients ability to View various sport centers, facilities and their available slots. 
