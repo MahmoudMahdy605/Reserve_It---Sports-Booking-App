@@ -49,7 +49,7 @@ Project duration is from 10/April/2021 until 10/June/2021. Coded in c# and Xamar
 6- Allow the sport Center to add as much centers as he want ( without any additional payment ).<br />
 
 <br /><br />
-*You can View some of the project UI pages from " UI pages " folder.
+*You can View some of the project front-end views from " Front-end lookings " folder.
 
 <br />
 *In case you like to run our project:<br /> 
