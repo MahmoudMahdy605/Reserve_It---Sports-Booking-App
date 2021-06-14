@@ -15,12 +15,13 @@ Ignory backend messages appear in the screen of the app.
 
 <br>
 *Things need to be modified: <br>
-
+<br>
 1- Edit code of checking conflict bookings ( especially after 12AM ).<br>
 2- Add images for the center sport at "Booking" page.<br>
 3- Add the working time of centers on firebase ( convert from static to dynamic ).<br>
 4- Check costs of Firebase & Stripe.<br>
 5- Check security of Firebase & Stripe.<br>
 6- Refund must cost even before 2 days.<br>
+7- Add another booking check at "Payment page" ( before click of payment button ).
 
 
