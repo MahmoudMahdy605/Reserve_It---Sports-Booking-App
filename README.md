@@ -29,7 +29,7 @@ Project duration is from 10/April/2021 until 10/June/2021. Coded in c# and Xamar
 
 2- Moustafa Mahdy: responsible for online payment process and 40% of front-end code using xaml.
 
-3- Mahmoud Mahdy: responsible for UI design and contribute in online payment process.
+3- Mahmoud Mahdy: responsible for UI design, online payment process and front-end code using xaml.
 
 4- Tasnimul Hasan: responsible 30% of front-end code using xaml.
 
